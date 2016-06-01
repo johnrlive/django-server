@@ -20,10 +20,10 @@ echo '[Welcome to django-server]'
 echo '(setup can take more 5 minutes)'
 
 #### START install prerequisite
-echo '[###### Update server ######]'
+echo '[###### START Prerequisite ######]'
 sleep 1
-sudo aptitude -y update && sudo aptitude -y upgrade
-echo '[###### Done ######]'
+sudo aptitude -y update && sudo aptitude -y upgrade && sudo aptitude -y git
+echo '[###### DONE Prerequisite ######]'
 sleep 1
 #### END install prerequisite
 
@@ -31,12 +31,18 @@ sleep 1
 echo '[###### Install Postgres ######]'
 sleep 1
 sudo aptitude install -y postgresql postgresql-contrib
-sudo su - postgres
-sleep 1
-createuser --interactive -P
-sleep 1
-createdb --owner $NAME $USER
-echo 'createdb --owner hello_django hello'
+echo '#### Login into postgres as superuser'
+echo '#### manually type: sudo su - postgres'
+echo '#### manually type: createuser --interactive -P'
+echo '##### example:'
+echo 'Enter name of role to add: hello_django'
+echo 'Enter password for new role: [blank]'
+echo 'Enter it again: [blank]'
+echo 'Shall the new role be a superuser? (y/n) n'
+echo 'Shall the new role be allowed to create databases? (y/n) n'
+echo 'Shall the new role be allowed to create more new roles? (y/n) n'
+echo '#### manually type: createdb --owner $NAME $USER'
+echo '#### example: createdb --owner hello_django hello'
 logout
 echo '[###### Postgress Install Done ######]'
 sleep 1
@@ -49,7 +55,7 @@ sleep 1
 echo '[####### Application User ######]'
 sleep 1
 sudo groupadd --system $GROUP
-echo 'sudo groupadd --system webapps'
+echo '#### example: sudo groupadd --system webapps'
 sudo useradd --system --gid $GROUP --shell /bin/bash --home /$GROUP/$NAME $USER
 echo '# sudo useradd --system --gid webapps --shell /bin/bash --home /webapps/hello_django hello'
 echo '[####### Application User DONE ######]'
