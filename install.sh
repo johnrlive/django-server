@@ -32,18 +32,24 @@ echo '[###### Install Postgres ######]'
 sleep 1
 sudo aptitude install -y postgresql postgresql-contrib
 echo '#### Login into postgres as superuser'
-echo '#### manually type: sudo su - postgres'
-echo '#### manually type: createuser --interactive -P'
-echo '##### example:'
-echo 'Enter name of role to add: hello_django'
-echo 'Enter password for new role: [blank]'
-echo 'Enter it again: [blank]'
-echo 'Shall the new role be a superuser? (y/n) n'
-echo 'Shall the new role be allowed to create databases? (y/n) n'
-echo 'Shall the new role be allowed to create more new roles? (y/n) n'
-echo '#### manually type: createdb --owner $NAME $USER'
-echo '#### example: createdb --owner hello_django hello'
-logout
+echo '==== type: sudo su - postgres'
+
+echo '#### Createuser in Postgres'
+echo '==== type: createuser --interactive -P'
+
+echo '# example:'
+echo '# Enter name of role to add: hello_django'
+echo '# Enter password for new role: [blank]'
+echo '# Enter it again: [blank]'
+echo '# Shall the new role be a superuser? (y/n) n'
+echo '# Shall the new role be allowed to create databases? (y/n) n'
+echo '# Shall the new role be allowed to create more new roles? (y/n) n'
+
+echo '==== type: createdb --owner $NAME $USER'
+echo '# example: createdb --owner hello_django hello'
+
+echo '==== type: logout'
+echo '# this logs out of postgres shell'
 echo '[###### Postgress Install Done ######]'
 sleep 1
 ##### End install PostgreSQL
