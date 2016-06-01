@@ -65,7 +65,7 @@ clear
 
 # echo '[###### START INSTALL PIPS ######]'
 # sleep 1
-pip install django
+sudo pip install -y django
 
 
 
