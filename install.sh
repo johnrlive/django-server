@@ -28,44 +28,62 @@ sleep 1
 #### END install prerequisite
 
 
-##### START Setup for Application User
+echo '[##### START Setup for Application User]'
 # Even though Django has a pretty good security track record, web applications can become compromised. If the application has limited access to resources on your server, potential damage can also be limited. Your web applications should run as system users with limited privileges.
-#
 # Create a user for your app, named hello and assigned to a system group called webapps.
-echo '[####### Application User ######]'
 sleep 1
 sudo groupadd --system $GROUP
 # echo '# example: sudo groupadd --system webapps'
+
 sudo useradd --system --gid $GROUP --shell /bin/bash --home /$GROUP/$NAME $USER
 # echo '# sudo useradd --system --gid webapps --shell /bin/bash --home /webapps/hello_django hello'
+
+sudo mkdir -p /$GROUP/$NAME/
+echo '# sudo mkdir -p /webapps/hello_django/'
+
+sudo chown $USER /$GROUP/$NAME/
+echo '#sudo chown hello /webapps/hello_django/'
+
 echo '[####### Application User DONE ######]'
 sleep 1
-##### End Setup for Application User
 
 
-##### START install PostgreSQL
-echo '[###### Install Postgres ######]'
+
+echo '[###### START Install virtualenv and create an environment for you app #####]'
+# Virtualenv is a tool which allows you to create separate Python environments on your system. This allows you to run applications with different sets of requirements concurrently (e.g. one based on Django 1.5, another based on 1.6). virtualenv is easy to install on Debian:
 sleep 1
-sudo aptitude install -y postgresql postgresql-contrib
-echo '#### Login into postgres as superuser'
-echo '==== type: sudo su - postgres'
-
-echo '#### Createuser in Postgres'
-echo '==== type: createuser --interactive -P'
-
-echo '# example:'
-echo '# Enter name of role to add: hello_django'
-echo '# Enter password for new role: [blank]'
-echo '# Enter it again: [blank]'
-echo '# Shall the new role be a superuser? (y/n) n'
-echo '# Shall the new role be allowed to create databases? (y/n) n'
-echo '# Shall the new role be allowed to create more new roles? (y/n) n'
-
-echo '==== type: createdb --owner $NAME $USER'
-echo '# example: createdb --owner hello_django hello'
-
-echo '==== type: logout'
-echo '# this logs out of postgres shell'
-echo '[###### Postgress Install Done ######]'
+sudo aptitude install python-virtualenv
 sleep 1
-##### End install PostgreSQL
+echo '[###### END Install virtualenv and create an environment for you app #####]'
+
+# ##### START install PostgreSQL
+# echo '[###### Install Postgres ######]'
+# sleep 1
+#
+# sudo aptitude install -y postgresql postgresql-contrib
+# echo '#### Login into postgres as superuser'
+# echo '==== type: sudo su - postgres'
+# sleep 1
+#
+# echo '#### Createuser in Postgres'
+# echo '==== type: createuser --interactive -P'
+# sleep 1
+#
+# echo '# example:'
+# echo '# Enter name of role to add: hello_django'
+# echo '# Enter password for new role: [blank]'
+# echo '# Enter it again: [blank]'
+# echo '# Shall the new role be a superuser? (y/n) n'
+# echo '# Shall the new role be allowed to create databases? (y/n) n'
+# echo '# Shall the new role be allowed to create more new roles? (y/n) n'
+# sleep 1
+#
+# echo '==== type: createdb --owner $NAME $USER'
+# echo '# example: createdb --owner hello_django hello'
+# sleep 1
+#
+# echo '==== type: logout'
+# echo '# this logs out of postgres shell'
+# echo '[###### Postgress Install Done ######]'
+# sleep 1
+# ##### End install PostgreSQL
