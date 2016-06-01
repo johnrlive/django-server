@@ -60,6 +60,13 @@ sudo aptitude -y install python-virtualenv
 sleep 1
 echo '[###### END Install virtualenv and create an environment for you app #####]'
 
+
+### CODE ABOVE: Is working ###
+
+################################### BREAK ##########################################
+
+### CODE BELOW: NEEDS MANUAL Proccess  ###
+
 # ##### START install PostgreSQL
 # echo '[###### Install Postgres ######]'
 # sleep 1
