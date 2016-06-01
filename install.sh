@@ -27,6 +27,22 @@ echo '[###### DONE Prerequisite ######]'
 sleep 1
 #### END install prerequisite
 
+
+##### START Setup for Application User
+# Even though Django has a pretty good security track record, web applications can become compromised. If the application has limited access to resources on your server, potential damage can also be limited. Your web applications should run as system users with limited privileges.
+#
+# Create a user for your app, named hello and assigned to a system group called webapps.
+echo '[####### Application User ######]'
+sleep 1
+sudo groupadd --system $GROUP
+# echo '# example: sudo groupadd --system webapps'
+sudo useradd --system --gid $GROUP --shell /bin/bash --home /$GROUP/$NAME $USER
+# echo '# sudo useradd --system --gid webapps --shell /bin/bash --home /webapps/hello_django hello'
+echo '[####### Application User DONE ######]'
+sleep 1
+##### End Setup for Application User
+
+
 ##### START install PostgreSQL
 echo '[###### Install Postgres ######]'
 sleep 1
@@ -53,17 +69,3 @@ echo '# this logs out of postgres shell'
 echo '[###### Postgress Install Done ######]'
 sleep 1
 ##### End install PostgreSQL
-
-##### START Setup for Application User
-# Even though Django has a pretty good security track record, web applications can become compromised. If the application has limited access to resources on your server, potential damage can also be limited. Your web applications should run as system users with limited privileges.
-#
-# Create a user for your app, named hello and assigned to a system group called webapps.
-echo '[####### Application User ######]'
-sleep 1
-sudo groupadd --system $GROUP
-echo '#### example: sudo groupadd --system webapps'
-sudo useradd --system --gid $GROUP --shell /bin/bash --home /$GROUP/$NAME $USER
-echo '# sudo useradd --system --gid webapps --shell /bin/bash --home /webapps/hello_django hello'
-echo '[####### Application User DONE ######]'
-sleep 1
-##### End Setup for Application User
