@@ -16,49 +16,61 @@ if [ $script_runner == "root" ] ; then
 fi
 
 clear
-echo '[Welcome to django-server]'
-echo '(setup can take more 5 minutes)'
+# echo '[Welcome to django-server]'
+# echo '(setup can take more 5 minutes)'
+#
+# #### START install prerequisite
+# echo '[###### START Prerequisite ######]'
+# sleep 1
+# sudo aptitude -y update && sudo aptitude -y upgrade && sudo aptitude -y git
+# echo '[###### DONE Prerequisite ######]'
+# sleep 1
+# #### END install prerequisite
+#
+#
+# echo '[##### START Setup for Application User]'
+# # Even though Django has a pretty good security track record, web applications can become compromised. If the application has limited access to resources on your server, potential damage can also be limited. Your web applications should run as system users with limited privileges.
+# # Create a user for your app, named hello and assigned to a system group called webapps.
+# sleep 1
+# sudo groupadd --system $GROUP
+# # echo '# example: sudo groupadd --system webapps'
+#
+# sudo useradd --system --gid $GROUP --shell /bin/bash --home /$GROUP/$NAME $USER
+# # echo '# sudo useradd --system --gid webapps --shell /bin/bash --home /webapps/hello_django hello'
+#
+# echo '[###### Create and activate an environment for your application ######]'
+# # I like to keep all my web apps in the /webapps/ directory. If you prefer /var/www/, /srv/ or something else, use that instead. Create a directory to store your application in /webapps/hello_django/ and change the owner of that directory to your application user hello
+#
+# sudo mkdir -p /$GROUP/$NAME/
+# echo '# sudo mkdir -p /webapps/hello_django/'
+#
+# sudo chown $USER /$GROUP/$NAME/
+# echo '#sudo chown hello /webapps/hello_django/'
+#
+# sleep 1
+# echo '[####### Application User DONE ######]'
+# sleep 1
 
-#### START install prerequisite
-echo '[###### START Prerequisite ######]'
-sleep 1
-sudo aptitude -y update && sudo aptitude -y upgrade && sudo aptitude -y git
-echo '[###### DONE Prerequisite ######]'
-sleep 1
-#### END install prerequisite
 
-
-echo '[##### START Setup for Application User]'
-# Even though Django has a pretty good security track record, web applications can become compromised. If the application has limited access to resources on your server, potential damage can also be limited. Your web applications should run as system users with limited privileges.
-# Create a user for your app, named hello and assigned to a system group called webapps.
-sleep 1
-sudo groupadd --system $GROUP
-# echo '# example: sudo groupadd --system webapps'
-
-sudo useradd --system --gid $GROUP --shell /bin/bash --home /$GROUP/$NAME $USER
-# echo '# sudo useradd --system --gid webapps --shell /bin/bash --home /webapps/hello_django hello'
-
-echo '[###### Create and activate an environment for your application ######]'
-# I like to keep all my web apps in the /webapps/ directory. If you prefer /var/www/, /srv/ or something else, use that instead. Create a directory to store your application in /webapps/hello_django/ and change the owner of that directory to your application user hello
-
-sudo mkdir -p /$GROUP/$NAME/
-echo '# sudo mkdir -p /webapps/hello_django/'
-
-sudo chown $USER /$GROUP/$NAME/
-echo '#sudo chown hello /webapps/hello_django/'
-
-sleep 1
-echo '[####### Application User DONE ######]'
-sleep 1
+# echo '[###### START Install virtualenv and create an environment for you app #####]'
+# # Virtualenv is a tool which allows you to create separate Python environments on your system. This allows you to run applications with different sets of requirements concurrently (e.g. one based on Django 1.5, another based on 1.6). virtualenv is easy to install on Debian:
+# sleep 1
+# sudo aptitude -y install python-virtualenv
+# sleep 1
+# echo '[###### END Install virtualenv and create an environment for you app #####]'
 
 
 
-echo '[###### START Install virtualenv and create an environment for you app #####]'
-# Virtualenv is a tool which allows you to create separate Python environments on your system. This allows you to run applications with different sets of requirements concurrently (e.g. one based on Django 1.5, another based on 1.6). virtualenv is easy to install on Debian:
-sleep 1
-sudo aptitude -y install python-virtualenv
-sleep 1
-echo '[###### END Install virtualenv and create an environment for you app #####]'
+
+
+# echo '[###### START INSTALL PIPS ######]'
+# sleep 1
+pip install django
+
+
+
+
+
 
 
 ### CODE ABOVE: Is working ###
