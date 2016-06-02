@@ -22,10 +22,24 @@ clear
 # #### START install prerequisite
 # echo '[###### START Prerequisite ######]'
 # sleep 1
-# sudo aptitude -y update && sudo aptitude -y upgrade && sudo aptitude -y git
-# echo '[###### install python-dev packages ######]'
-# sleep 1
-# sudo aptitude -y install python-dev python-setuptools libtiff4-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev tcl8.5-dev tk8.5-dev python-tk
+# sudo aptitude -y update && sudo aptitude -y upgrade
+echo '[###### install linux tools ######]'
+sleep 1
+sudo aptitude -y install git mc supervisor nginx
+
+echo '[###### install python-dev packages ######]'
+sleep 1
+sudo aptitude -y install python-dev python-setuptools python-virtualenv
+
+echo '[###### install database packages tools ######]'
+sleep 1
+sudo aptitude -y install postgresql postgresql-contrib libpq-dev
+
+echo '[###### packages for Pillow egg to work ######]'
+sleep 1
+sudo aptitude -y install libtiff5-dev libjpeg8-dev zlib1g-dev \
+    libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python-tk
+
 # echo '[###### DONE Prerequisite ######]'
 # sleep 1
 # #### END install prerequisite
@@ -55,12 +69,10 @@ clear
 # sleep 1
 
 
-# echo '[###### START Install virtualenv and create an environment for you app #####]'
-# # Virtualenv is a tool which allows you to create separate Python environments on your system. This allows you to run applications with different sets of requirements concurrently (e.g. one based on Django 1.5, another based on 1.6). virtualenv is easy to install on Debian:
-# sleep 1
+# [###### START Install virtualenv and create an environment for you app #####]
+# Virtualenv is a tool which allows you to create separate Python environments on your system. This allows you to run applications with different sets of requirements concurrently (e.g. one based on Django 1.5, another based on 1.6). virtualenv is easy to install on Debian:
 # sudo aptitude -y install python-virtualenv
-# sleep 1
-# echo '[###### END Install virtualenv and create an environment for you app #####]'
+
 
 
 
@@ -68,10 +80,33 @@ clear
 
 echo '[###### START INSTALL PIPS ######]'
 sleep 1
-sudo pip install django
-sudo pip install pillow
-sudo pip install wagtail
 
+sudo pip install django
+echo '#######  Django installed ###### '
+sleep 1
+
+sudo pip install pillow
+echo '###### Pillow installed ######'
+sleep 1
+
+sudo pip install wagtail
+echo '###### Wagtail installed ######'
+sleep 1
+
+sudo pip install psycopg2
+echo '###### Psycopg2 database adapter installed ######'
+sleep 1
+
+sudo pip install setproctitle
+echo '######  Setproctitle installed ######'
+sleep 1
+
+sudo pip install gunicorn
+echo '###### Gunicorn installed ######'
+sleep 1
+
+echo '[##### END INSTALL PIPS ######]'
+sleep 1
 
 
 
@@ -89,7 +124,6 @@ sudo pip install wagtail
 # echo '[###### Install Postgres ######]'
 # sleep 1
 #
-# sudo aptitude install -y postgresql postgresql-contrib
 # echo '#### Login into postgres as superuser'
 # echo '==== type: sudo su - postgres'
 # sleep 1
@@ -115,7 +149,3 @@ sudo pip install wagtail
 # echo '# this logs out of postgres shell'
 # echo '[###### Postgress Install Done ######]'
 # sleep 1
-# ##### End install PostgreSQL
-###
-
-
