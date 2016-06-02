@@ -23,6 +23,9 @@ clear
 # echo '[###### START Prerequisite ######]'
 # sleep 1
 # sudo aptitude -y update && sudo aptitude -y upgrade && sudo aptitude -y git
+# echo '[###### install python-dev packages ######]'
+# sleep 1
+# sudo aptitude -y install python-dev python-setuptools libtiff4-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev tcl8.5-dev tk8.5-dev python-tk
 # echo '[###### DONE Prerequisite ######]'
 # sleep 1
 # #### END install prerequisite
@@ -63,9 +66,12 @@ clear
 
 
 
-# echo '[###### START INSTALL PIPS ######]'
-# sleep 1
-sudo pip install -y django
+echo '[###### START INSTALL PIPS ######]'
+sleep 1
+sudo pip install django
+sudo pip install pillow
+sudo pip install wagtail
+
 
 
 
@@ -110,3 +116,6 @@ sudo pip install -y django
 # echo '[###### Postgress Install Done ######]'
 # sleep 1
 # ##### End install PostgreSQL
+###
+
+
