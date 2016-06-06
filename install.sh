@@ -1,7 +1,8 @@
 #!/bin/bash
-NAME="hello_django"                               # Name of the application
-USER="hello"                                      # the user to run as
-GROUP="webapps"                                   # the group to run as
+NAME="hello_django"                                 # Name of the application
+USER="hello"                                        # the user to run as
+GROUP="webapps"                                     # the group to run as
+REPO="https://github.com/johnrlive/django-server"   # Git repository
 # DJANGODIR=/webapps/$NAME/$USER                    # Django project directory
 # SOCKFILE=/webapps/$NAME/run/gunicorn.sock         # we will communicte using this unix socket
 # NUM_WORKERS=3                                     # how many worker processes should Gunicorn spawn
@@ -40,11 +41,47 @@ sleep 1
 sudo aptitude -y install libtiff5-dev libjpeg8-dev zlib1g-dev \
     libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python-tk
 
-# echo '[###### DONE Prerequisite ######]'
-# sleep 1
-# #### END install prerequisite
-#
-#
+echo '[###### START INSTALL PIPS ######]'
+sleep 1
+
+sudo pip install django
+echo '#######  Django installed ######'
+sleep 1
+
+sudo pip install pillow
+echo '###### Pillow installed ######'
+sleep 1
+
+sudo pip install wagtail
+echo '###### Wagtail installed ######'
+sleep 1
+
+sudo pip install psycopg2
+echo '###### Psycopg2 database adapter installed ######'
+sleep 1
+
+sudo pip install setproctitle
+echo '######  Setproctitle installed ######'
+sleep 1
+
+sudo pip install gunicorn
+echo '###### Gunicorn installed ######'
+sleep 1
+
+echo '[###### DONE Prerequisite ######]'
+sleep 1
+
+##### END install prerequisitei
+
+echo 'Create and activate an environment for your application
+
+I like to keep all my web apps in the /webapps/ directory. If you prefer /var/www/, /srv/ or something else, use that instead. Create a directory to store your application in /webapps/hello_django/ and change the owner of that directory to your application user hello'
+sleep 1
+sudo mkdir -p /webapps/$NAME/
+sudo chown hello /webapps/$NAME/
+
+
+
 # echo '[##### START Setup for Application User]'
 # # Even though Django has a pretty good security track record, web applications can become compromised. If the application has limited access to resources on your server, potential damage can also be limited. Your web applications should run as system users with limited privileges.
 # # Create a user for your app, named hello and assigned to a system group called webapps.
@@ -75,38 +112,6 @@ sudo aptitude -y install libtiff5-dev libjpeg8-dev zlib1g-dev \
 
 
 
-
-
-
-echo '[###### START INSTALL PIPS ######]'
-sleep 1
-
-sudo pip install django
-echo '#######  Django installed ###### '
-sleep 1
-
-sudo pip install pillow
-echo '###### Pillow installed ######'
-sleep 1
-
-sudo pip install wagtail
-echo '###### Wagtail installed ######'
-sleep 1
-
-sudo pip install psycopg2
-echo '###### Psycopg2 database adapter installed ######'
-sleep 1
-
-sudo pip install setproctitle
-echo '######  Setproctitle installed ######'
-sleep 1
-
-sudo pip install gunicorn
-echo '###### Gunicorn installed ######'
-sleep 1
-
-echo '[##### END INSTALL PIPS ######]'
-sleep 1
 
 
 
@@ -149,3 +154,13 @@ sleep 1
 # echo '# this logs out of postgres shell'
 # echo '[###### Postgress Install Done ######]'
 # sleep 1
+1
+1
+1
+Postgress Install Done ######]'
+# sleep 1
+1
+1
+1
+
+1
