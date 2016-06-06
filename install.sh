@@ -24,52 +24,52 @@ clear
 # echo '[###### START Prerequisite ######]'
 # sleep 1
 # sudo aptitude -y update && sudo aptitude -y upgrade
-echo '[###### install linux tools ######]'
-sleep 1
-sudo aptitude -y install git mc supervisor nginx
-
-echo '[###### install python-dev packages ######]'
-sleep 1
-sudo aptitude -y install python-dev python-setuptools python-virtualenv
-
-echo '[###### install database packages tools ######]'
-sleep 1
-sudo aptitude -y install postgresql postgresql-contrib libpq-dev
-
-echo '[###### packages for Pillow egg to work ######]'
-sleep 1
-sudo aptitude -y install libtiff5-dev libjpeg8-dev zlib1g-dev \
-    libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python-tk
-
-echo '[###### START INSTALL PIPS ######]'
-sleep 1
-
-sudo pip install django
-echo '#######  Django installed ######'
-sleep 1
-
-sudo pip install pillow
-echo '###### Pillow installed ######'
-sleep 1
-
-sudo pip install wagtail
-echo '###### Wagtail installed ######'
-sleep 1
-
-sudo pip install psycopg2
-echo '###### Psycopg2 database adapter installed ######'
-sleep 1
-
-sudo pip install setproctitle
-echo '######  Setproctitle installed ######'
-sleep 1
-
-sudo pip install gunicorn
-echo '###### Gunicorn installed ######'
-sleep 1
-
-echo '[###### DONE Prerequisite ######]'
-sleep 1
+# echo '[###### install linux tools ######]'
+# sleep 1
+# sudo aptitude -y install git mc supervisor nginx
+#
+# echo '[###### install python-dev packages ######]'
+# sleep 1
+# sudo aptitude -y install python-dev python-setuptools python-virtualenv
+#
+# echo '[###### install database packages tools ######]'
+# sleep 1
+# sudo aptitude -y install postgresql postgresql-contrib libpq-dev
+#
+# echo '[###### packages for Pillow egg to work ######]'
+# sleep 1
+# sudo aptitude -y install libtiff5-dev libjpeg8-dev zlib1g-dev \
+#     libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python-tk
+#
+# echo '[###### START INSTALL PIPS ######]'
+# sleep 1
+#
+# sudo pip install django
+# echo '#######  Django installed ######'
+# sleep 1
+#
+# sudo pip install pillow
+# echo '###### Pillow installed ######'
+# sleep 1
+#
+# sudo pip install wagtail
+# echo '###### Wagtail installed ######'
+# sleep 1
+#
+# sudo pip install psycopg2
+# echo '###### Psycopg2 database adapter installed ######'
+# sleep 1
+#
+# sudo pip install setproctitle
+# echo '######  Setproctitle installed ######'
+# sleep 1
+#
+# sudo pip install gunicorn
+# echo '###### Gunicorn installed ######'
+# sleep 1
+#
+# echo '[###### DONE Prerequisite ######]'
+# sleep 1
 
 ##### END install prerequisitei
 
@@ -81,7 +81,7 @@ sudo mkdir -p /webapps/$NAME/
 sudo chown $USER /webapps/$NAME/
 sleep 1
 
-sudo su - hello
+sudo su - $USER
 cd /webapps/$NAME/
 virtualenv .
 source bin/activate
@@ -161,13 +161,3 @@ django-admin.py startproject $USER
 # echo '# this logs out of postgres shell'
 # echo '[###### Postgress Install Done ######]'
 # sleep 1
-1
-1
-1
-Postgress Install Done ######]'
-# sleep 1
-1
-1
-1
-
-1
