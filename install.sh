@@ -78,7 +78,14 @@ echo 'Create and activate an environment for your application
 I like to keep all my web apps in the /webapps/ directory. If you prefer /var/www/, /srv/ or something else, use that instead. Create a directory to store your application in /webapps/hello_django/ and change the owner of that directory to your application user hello'
 sleep 1
 sudo mkdir -p /webapps/$NAME/
-sudo chown hello /webapps/$NAME/
+sudo chown $USER /webapps/$NAME/
+sleep 1
+
+sudo su - hello
+cd /webapps/$NAME/
+virtualenv .
+source bin/activate
+django-admin.py startproject $USER
 
 
 
