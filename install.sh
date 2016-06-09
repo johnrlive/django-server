@@ -41,6 +41,7 @@ sudo aptitude -y install libtiff5-dev libjpeg8-dev zlib1g-dev \
 ##############################################################################################
 #
 #
+clear
 echo '#########################################'
 echo '#    [2]  START POSTGRESQL Install      #'
 echo '#########################################'
@@ -103,16 +104,23 @@ sudo aptitude -y install python-virtualenv
 echo 'Create and activate an environment for your application I like to keep all my web apps in the /webapps/ directory. If you prefer /var/www/, /srv/ or something else, use that instead.create a directory to store your application in /webapps/hello_django/ and change the owner of that directory to your application user hello'
 sleep 1
 sudo mkdir -p /$GROUP/$NAME/
-sudo chown $USER /$GROUP/$NAME/
+sudo chown -R $USER:$USER /$GROUP/$NAME/
 #
 #
 ##############################################################################################
 #
 #
 echo 'as the application user create a virtual python environment in the application directory:'
-sudo su - $USER 
+sudo su - $USER
+#
+#
+##############################################################################################
+#
+#
+echo '[PART 2]'
+sleep 1 
 cd /$GROUP/$NAME/
-virtualenv .
+sudo virtualenv .
 source bin/activate
 #
 #
@@ -183,12 +191,12 @@ sudo aptitude -y install supervisor
 
 echo 'When Supervisor is installed you can give it programs to start and watch by creating configuration files in the /etc/supervisor/conf.d directory. For our hello application we’ll create a file named /etc/supervisor/conf.d/hello.conf with this content:'
 sleep 1
-touch /etc/supervisor/conf.d/$NAME.conf
+sudo touch /etc/supervisor/conf.d/$NAME.conf
 
 echo 'Create the file to store your application’s log messages:'
 sleep 1
 mkdir -p /$GROUP/$NAME/logs/
-touch /$GROUP/$NAME/logs/gunicorn_supervisor.log 
+sudo touch /$GROUP/$NAME/logs/gunicorn_supervisor.log 
 
 echo 'After you save the configuration file for your program you can ask supervisor to reread configuration files and update (which will start your the newly registered app).'
 sleep 1
@@ -203,7 +211,7 @@ echo 'Install Nginx'
 sleep 1 
 sudo aptitude -y install nginx
 sudo service nginx start
-touch /etc/nginx/sites-available/$NAME
+sudo touch /etc/nginx/sites-available/$NAME
 sudo ln -s /etc/nginx/sites-available/$NAME /etc/nginx/sites-enabled/$NAME
 sudo service nginx restart
 
