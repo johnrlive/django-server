@@ -1,3 +1,9 @@
+#! /bin/bash/
+// NAME="hello_django"
+// DOMAIN="example.com"
+// GUNICORN="http://hello_app_server"
+
+
 upstream hello_app_server {
   # fail_timeout=0 means we always retry an upstream even if it failed
   # to return a good HTTP response (in case the Unicorn master nukes a

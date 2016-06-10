@@ -104,7 +104,7 @@ sudo aptitude -y install python-virtualenv
 echo 'Create and activate an environment for your application I like to keep all my web apps in the /webapps/ directory. If you prefer /var/www/, /srv/ or something else, use that instead.create a directory to store your application in /webapps/hello_django/ and change the owner of that directory to your application user hello'
 sleep 1
 sudo mkdir -p /$GROUP/$NAME/
-sudo chown -R $USER:$USER /$GROUP/$NAME/
+sudo chown -R $USER /$GROUP/$NAME/
 #
 #
 ##############################################################################################
@@ -120,7 +120,7 @@ sudo su - $USER
 echo '[PART 2]'
 sleep 1 
 cd /$GROUP/$NAME/
-sudo virtualenv .
+virtualenv .
 source bin/activate
 #
 #
@@ -132,8 +132,10 @@ sleep 1
 pip install django
 echo 'your environment with django should be ready to use. go ahead and create an empty django project.'
 sleep 1
-# django-admin.py startproject $user 
+django-admin.py startproject $USER 
+# uncomment this to test django is created
 # cd $USER 
+# python manage.py runserver example.com:8000
 
 echo '###### Pillow installed ######'
 sleep 1
@@ -142,11 +144,11 @@ pip install pillow
 
 echo 'allowing other users write access to the application directory'
 sleep 1
-
-sudo chown -r $USER:users /$GROUP/$NAME
-sudo chmod -r g+w /$GROUP/$NAME
+sudo chown -R $USER:users /$GROUP/$NAME
+sudo chmod -R g+w /$GROUP/$NAME
 id 
-# sudo usermod -a -g users 'whoami'
+sudo usermod -a -G users `whoami`
+sleep 2
 #
 #
 ##############################################################################################
@@ -161,17 +163,29 @@ pip install psycopg2
 #
 #
 echo '#########################################'
-echo '#  [START Gunicorn INSTALL]  #'
+echo '#        [START Gunicorn INSTALL]       #'
 echo '#########################################'
 sleep 1
-pip install gunicorn 
+pip install gunicorn
+clear
+echo 'Now that you have gunicorn, you can test whether it can serve your Django application by running the following command:'
+sleep 1
+echo '(hello_django)hello@django:~$ gunicorn hello.wsgi:application --bind example.com:8001
+You should now be able to access the Gunicorn server from http://example.com:8001 . I intentionally changed port 8000 to 8001 to force your browser to establish a new connection.'
+sleep 1
+echo 'Gunicorn is installed and ready to serve your app. Let’s set some configuration options to make it more useful. I like to set a number of parameters, so let’s put them all into a small BASH script, which I save as bin/gunicorn_start'
 # unicorn $USER.wsgi:application --bind example.com:8001
 echo 'Let’s set some configuration options to make it more useful.'
 sleep 1
-touch bin/gunicorn_start 
+cp gunicorn_start.bash bin/gunicorn_start 
 echo 'Set the executable bit on the gunicorn_start script:'
 sleep 1
 sudo chmod u+x bin/gunicorn_start
+sudo su - $USER
+echo 'type this: bin/gunicorn_start'
+sleep 1 
+bin/gunicorn_start
+echo 'should see: Starting hello_app as hello'
 #
 #
 ##############################################################################################
@@ -191,7 +205,7 @@ sudo aptitude -y install supervisor
 
 echo 'When Supervisor is installed you can give it programs to start and watch by creating configuration files in the /etc/supervisor/conf.d directory. For our hello application we’ll create a file named /etc/supervisor/conf.d/hello.conf with this content:'
 sleep 1
-sudo touch /etc/supervisor/conf.d/$NAME.conf
+cp supervisor.conf.sh /etc/supervisor/conf.d/$NAME.conf
 
 echo 'Create the file to store your application’s log messages:'
 sleep 1
@@ -202,6 +216,12 @@ echo 'After you save the configuration file for your program you can ask supervi
 sleep 1
 sudo supervisorctl reread
 sudo supervisorctl update
+clear
+sudo supervisorctl status $USER 
+sudo supervisorctl stop $USER 
+sudo supervisorctl start $USER 
+sudo supervisorctl restart $USER 
+sleep 1
 #
 #
 ##############################################################################################
@@ -211,12 +231,6 @@ echo 'Install Nginx'
 sleep 1 
 sudo aptitude -y install nginx
 sudo service nginx start
-sudo touch /etc/nginx/sites-available/$NAME
+cp nginx.sh /etc/nginx/sites-available/$NAME
 sudo ln -s /etc/nginx/sites-available/$NAME /etc/nginx/sites-enabled/$NAME
 sudo service nginx restart
-
-
-
-
-
-
