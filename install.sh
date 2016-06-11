@@ -17,53 +17,47 @@ if [ $script_runner == "root" ] ; then
 fi
 
 echo '[Welcome to django-server]'
-# echo '(setup can take more 5 minutes)'
-# sleep 1
-# echo '#########################################'
-# echo '#      [1] Update Your System           #'
-# echo '#########################################'
-# sleep 1
-# sudo aptitude -y update && sudo aptitude -y upgrade
-# sudo aptitude -y install python-setuptools
-# 
-# echo 'Install linux tools'
-# sleep 1
-# sudo aptitude -y install git mc 
-# 
-# echo '[###### packages for Pillow egg to work ######]'
-# sleep 1
-# sudo aptitude -y install libtiff5-dev libjpeg8-dev zlib1g-dev \
-#     libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python-tk
-# #
-# #
-# echo '[###### Install Supervisor #######]'
-# sleep 1
-# sudo aptitude -y install supervisor
+echo '(setup can take more 5 minutes)'
+sleep 1
+echo '#########################################'
+echo '#      [1] Update Your System           #'
+echo '#########################################'
+sleep 1
+sudo aptitude -y update 
+sudo aptitude -y safe-upgrade
+
+echo 'Install linux tools'
+sleep 1
+sudo aptitude -y install python-setuptools
+sudo aptitude -y install git mc fail2ban 
+
+echo '[###### packages for Pillow egg to work ######]'
+sleep 1
+sudo aptitude -y install libtiff5-dev libjpeg8-dev zlib1g-dev \
+    libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python-tk
+
+echo '[###### Install Supervisor #######]'
+sleep 1
+sudo aptitude -y install supervisor
+
+echo '[###### Install Nginx ######]'
+sleep 1
+sudo aptitude -y install nginx
+sudo service nginx start
+sudo cp nginx.sh /etc/nginx/sites-available/$NAME
+sudo ln -s /etc/nginx/sites-available/$NAME /etc/nginx/sites-enabled/$NAME
+sudo service nginx restart
 #
-# echo '[###### Install Nginx ######]'
-# sleep 1
-# sudo aptitude -y install nginx
-# sudo service nginx start
-# sudo cp nginx.sh /etc/nginx/sites-available/$NAME
-# sudo ln -s /etc/nginx/sites-available/$NAME /etc/nginx/sites-enabled/$NAME
-# sudo service nginx restart
-
-
-
-
-# ##############################################################################################
-# #
-# #
-# clear
-# echo '#########################################'
-# echo '#    [2]  START POSTGRESQL Install      #'
-# echo '#########################################'
-# sleep 1
-# sudo aptitude -y install postgresql postgresql-contrib libpq-dev python-dev
-
-
-
-
+#
+##############################################################################################
+#
+#
+clear
+echo '#########################################'
+echo '#    [2]  START POSTGRESQL Install      #'
+echo '#########################################'
+sleep 1
+sudo aptitude -y install postgresql postgresql-contrib libpq-dev python-dev
 
 
 # echo '#### Login into postgres as superuser'
@@ -96,10 +90,10 @@ echo '[Welcome to django-server]'
 ##############################################################################################
 #
 #
-# echo '#########################################'
-# echo '#  [START Setup for Application User]   #'
-# echo '#########################################'
-# sleep 1
+echo '#########################################'
+echo '#  [START Setup for Application User]   #'
+echo '#########################################'
+sleep 1
 
 # Even though Django has a pretty good security track record, web applications can become compromised. If the application has limited access to resources on your server, potential damage can also be limited. Your web applications should run as system users with limited privileges.
 # Create a user for your app, named hello and assigned to a system group called webapps.
@@ -114,9 +108,9 @@ sudo useradd --system --gid $GROUP --shell /bin/bash --home /$GROUP/$NAME $USER
 ##############################################################################################
 #
 #
-# echo 'Install virtualenv and create an environment foryour app'
-# sleep 1
-# sudo aptitude -y install python-virtualenv
+echo 'Install virtualenv and create an environment foryour app'
+sleep 1
+sudo aptitude -y install python-virtualenv
 #
 #
 ##############################################################################################
@@ -125,17 +119,8 @@ sudo useradd --system --gid $GROUP --shell /bin/bash --home /$GROUP/$NAME $USER
 echo 'Create and activate an environment for your application I like to keep all my web apps in the /webapps/ directory. If you prefer /var/www/, /srv/ or something else, use that instead.create a directory to store your application in /webapps/hello_django/ and change the owner of that directory to your application user hello'
 sleep 1
 sudo mkdir -p /$GROUP/$NAME/
-sudo chown -R $USER /$GROUP/$NAME/
-echo 'allowing other users write access to the application directory'
-sleep 1
-sudo chown -R $USER:users /$GROUP/$NAME
-sudo chmod -R g+w /$GROUP/$NAME
-# id 
-# sudo usermod -a -G users `whoami`
-# sleep 2
+sudo chown $USER /$GROUP/$NAME/
 
- 
-#
 #
 ##############################################################################################
 #
@@ -150,8 +135,6 @@ sleep 1
 
 sudo cp ./install_part2.sh /$GROUP/$NAME/install_part2.sh
 sudo cp ./install_part3.sh /$GROUP/$NAME/install_part3.sh
-sudo cp ./gunicorn_start.sh /$GROUP/$NAME/bin/gunicorn_start
-sudo cp ./supervisor.conf.sh /etc/supervisor/conf.d/$NAME.conf
 
 echo '====== As the application user create a virtual python environment in the application directory:'
 echo '====== run: bash install_part2.sh'
