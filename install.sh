@@ -24,7 +24,7 @@ echo '#      [1] Update Your System           #'
 echo '#########################################'
 sleep 1
 sudo aptitude -y update 
-sudo aptitude -y safe-upgrade
+sudo aptitude -y upgrade
 
 echo 'Install linux tools'
 sleep 1
@@ -121,6 +121,13 @@ sleep 1
 sudo mkdir -p /$GROUP/$NAME/
 sudo chown $USER /$GROUP/$NAME/
 
+echo 'allowing other users write access to the application directory'
+sleep 1
+sudo chown -R $USER:users /$GROUP/$NAME
+sudo chmod -R g+w /$GROUP/$NAME
+# id 
+# sudo usermod -a -G users `whoami`
+sleep 1  
 #
 ##############################################################################################
 #
@@ -135,10 +142,19 @@ sleep 1
 
 sudo cp ./install_part2.sh /$GROUP/$NAME/install_part2.sh
 sudo cp ./install_part3.sh /$GROUP/$NAME/install_part3.sh
+sudo cp ./gunicorn_start.bash /$GROUP/$NAME/bin/gunicorn_start 
+# Set the gunicorn_start to be executable
+sudo chmod u+x /$GROUP/$NAME/bin/gunicorn_start
+sudo cp ./supervisor.conf.sh /etc/supervisor/conf.d/$NAME.conf
 
-echo '====== As the application user create a virtual python environment in the application directory:'
-echo '====== run: bash install_part2.sh'
+#echo '====== As the application user create a virtual python environment in the application directory:'
+
+echo '=== run these ==='
+echo '=== run: virtualenv .' 
+echo '=== run: source bin/activate'
+echo '=== run: bash install_part2.sh'
 sleep 1
+cd /$GROUP/$NAME/
 sudo su - $USER
 
 

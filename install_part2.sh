@@ -9,14 +9,14 @@ echo '#        Activate Virtualenv           # '
 echo '#########################################'
 sleep 1
 
-cd /$GROUP/$NAME/
-virtualenv . 
-source bin/activate
+# cd /$GROUP/$NAME/
+# virtualenv . 
+# source bin/activate
+# sleep 1
 
 echo '#########################################'
 echo '#    Installs django within virtualenv  #'
 echo '#########################################'
-
 sleep 1
 pip install django
 
@@ -26,14 +26,6 @@ pip install django
 # uncomment this to test django is created
 # cd $NAME 
 # python manage.py runserver
-
-echo 'allowing other users write access to the application directory'
-sleep 1
-sudo chown -R $USER:users /$GROUP/$NAME
-sudo chmod -R g+w /$GROUP/$NAME
-# id 
-# sudo usermod -a -G users `whoami`
-sleep 1  
 
 
 echo '#########################################'
@@ -55,8 +47,7 @@ echo '#        [START Gunicorn INSTALL]       #'
 echo '#########################################'
 sleep 1
 pip install gunicorn 
-sudo cp /home/admin/django-server/gunicorn_start.sh /$GROUP/$NAME/bin/gunicorn_start
-
+#sudo cp /home/admin/django-server/gunicorn_start.sh /$GROUP/$NAME/bin/gunicorn_start
 
 
 echo '#########################################'
@@ -64,12 +55,14 @@ echo '#        Setproctitle installed         #'
 echo '#########################################'
 sleep 1
 pip install setproctitle
-sudo cp /home/admin/django-server/supervisor.conf.sh /etc/supervisor/conf.d/$NAME.conf
+#sudo cp /home/admin/django-server/supervisor.conf.sh /etc/supervisor/conf.d/$NAME.conf
+
 
 echo 'hello@django:~$' 
 mkdir -p /$GROUP/$NAME/logs/
 echo 'hello@django:~$' 
 touch /$GROUP/$NAME/logs/gunicorn_supervisor.log 
+
 
 # echo '====== run: bash install_part3.sh'
 # sleep 1
