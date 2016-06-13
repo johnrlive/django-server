@@ -1,3 +1,5 @@
+#!/bin/bash
+
 NAME="hello_app"                                  # Name of the application
 DJANGODIR=/webapps/hello_django/hello             # Django project directory
 SOCKFILE=/webapps/hello_django/run/gunicorn.sock  # we will communicte using this unix socket
