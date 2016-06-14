@@ -34,16 +34,19 @@ sudo apt-get -y install nginx
 
 echo '=== Installing utilities...'
 sleep 1
-sudo apt-get -y install mc vim fail2ban
+sudo apt-get -y install mc vim fail2ban zsh
 
 echo '=== Apt packages completed ==='
-sleep 2
+sleep 1
 clear
-
 
 echo '=== installing Virtualenv...'
 sleep 1
 sudo pip install virtualenv
+
+# echo '=== Set ZSH shell as default...'
+# sleep 1
+# sudo chsh -s $(which zsh)
 
 echo '=== run the following commands ==='
 sleep 1
