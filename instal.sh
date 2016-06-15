@@ -22,13 +22,13 @@ sudo apt-get -y install libtiff5-dev libjpeg8-dev zlib1g-dev \
 
 echo '=== Installing packages for PostreSQL   ==='
 sleep 1
-sudo apt-get -y install postgresql postgresql-contrib
+sudo apt-get -y install postgresql postgresql-contrib libpq-dev
 
 echo '=== Installing utilities    ==='
 sleep 1
 sudo apt-get -y install mc vim fail2ban
 
-echo '===   Installing PIP & Virtualenv   ==='
+echo '===   Installing Python-pip & Virtualenv   ==='
 sleep 1
 sudo apt-get -y install python-pip
 sudo pip install virtualenv virtualenvwrapper
