@@ -22,20 +22,20 @@ server {
     location /static/ {
         access_log off;
         expires 3600;
-        alias /var/www/landers/static/;
+        alias /var/www/firstsite/static/;
     }
 
     # Set a longer expiry for CACHE/, because the filenames are unique.
     location /static/CACHE/ {
         access_log off;
         expires 864000;
-        alias /var/www/landers/static/CACHE/;
+        alias /var/www/firstsite/static/CACHE/;
     }
 
     # Only server /media/images by default, not e.g. original_images/.
     location /media/images/ {
         expires 864000;
-        alias /var/www/landers/media/images/;
+        alias /var/www//media/images/;
     }
 
     location / {
