@@ -1,0 +1,11 @@
+# Install with: `pip install -r requirements.txt`
+
+# Infrastructure
+Django >= 1.9.7, < 1.10
+Pillow >= 3.2.0
+
+# Eggs
+Django-countries >= 3.4.1
+
+# Debugging
+django-debug-toolbar >= 1.4
