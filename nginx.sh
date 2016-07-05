@@ -35,7 +35,7 @@ server {
     # Only server /media/images by default, not e.g. original_images/.
     location /media/images/ {
         expires 864000;
-        alias /var/www//media/images/;
+        alias /var/www/firstsite/media/images/;
     }
 
     location / {
