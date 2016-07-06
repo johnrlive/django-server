@@ -13,7 +13,9 @@ echo '(setup can take more 5 minutes)'
 sleep 1
 echo '===   Updating Your System    ==='
 sleep 1
-sudo apt-get -y update && sudo apt-get -y upgrade
+sudo apt-get -y update
+sudo apt-get -y upgrade
+sudo apt-get -y install aptitude
 
 echo '=== Installing dependencies for pillow egg    ==='
 sleep 1
