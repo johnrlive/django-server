@@ -4,5 +4,5 @@ alias re="bash ~/restart.sh"
 
 # Python
 alias m="python manage.py"
-alias mm="python manage.py makemigrations && python manage.py migratei
+alias mm="python manage.py makemigrations && python manage.py migrate"
 
