@@ -1,7 +1,8 @@
-set $APP_NAME firstsite;
-set $DOMAIN www.firstsite.com;
-
 server {
+    
+    set $APP_NAME firstsite;
+    set $DOMAIN www.firstsite.com;
+    
     listen 80;
     server_name $DOMAIN;
 
