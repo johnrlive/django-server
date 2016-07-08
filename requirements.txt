@@ -1,11 +1,19 @@
-# Install with: `pip install -r requirements.txt`
+# Versions are left out on purpose in order for you to use the latest ones.
+# After the first "pip install -r", just run "pip freeze" and add the version
+# to each package in each requirements/*.txt.
+# Can install with: `pip install -r base.txt`
 
 # Infrastructure
 Django >= 1.9.7, < 1.10
 Pillow >= 3.2.0
+Wagtail >= 1.5.2
 
 # Eggs
 Django-countries >= 3.4.1
 
 # Debugging
 django-debug-toolbar >= 1.4
+
+# Database
+psycopg2
+django-model-utils
