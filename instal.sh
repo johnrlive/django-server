@@ -22,6 +22,10 @@ sleep 1
 sudo apt-get -y install libtiff5-dev libjpeg8-dev zlib1g-dev \
      libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python-tk
 
+echo '=== Installing Dependency for brotlipy egg ==='
+sleep 1
+sudo apt-get -y install libffi-dev
+
 echo '=== Installing packages for PostreSQL   ==='
 sleep 1
 sudo apt-get -y install postgresql postgresql-contrib libpq-dev
